@@ -22,11 +22,19 @@ import './App.css';
 
 
 class App extends Component {
+    constructor(){
+      super()
+
+      this.state ={
+        name: '',
+        price: 0,
+        imageurl: ''
+      }
+    }
 
 
 
 
-  
   render() {
     return (
       <div className="App">
