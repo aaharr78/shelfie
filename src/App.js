@@ -1,46 +1,50 @@
 import React, { Component } from 'react';
 import './App.css';
-// let iventory = [
-//   {
-//     name: 'shirt',
-//     price: 19.95,
-//     imageurl: 'https://image.oregonlive.com/home/olive-media/width600/img/washingtoncounty_impact/photo/trump-shirtjpg-9492cd13e0a22292.jpg'
 
-//   },
-//   {
-//     name: 'shirt',
-//     price: 19.95,
-//     imageurl: 'https://cdn.shopify.com/s/files/1/1250/2479/products/ClassicBBBroyalredwhite_1024x1024.jpg?v=1505159736'
-//   },
-//   {
-//     name: 'shirt',
-//     price: 19.95,
-//     imageurl: 'https://shirtsofcotton.com/en/media/catalog/product/cache/10/image/1200x1200/9df78eab33525d08d6e5fb8d27136e95/s/h/shirtsofcotton-t-shirt-soc-08-front-1200px.jpg'
-//   }
-
-// ]
-
+import axios from 'axios';
 
 class App extends Component {
-    constructor(){
-      super()
+  constructor(props) {
+    super(props)
 
-      this.state ={
-        name: '',
-        price: 0,
-        imageurl: ''
-      }
+    this.state = {
+      inventory: []
     }
+  }
+updateInventory = inventory => {
+  this.setState({inventory})
+}
 
-
-
+// componentDidMount(){
+//   axios.get('/api/inventory').then(results => {
+//     this.setState({inventory: results.data})
+//   })
+// }
+deleteInventory = (id) => {
+  axios.delete(`/api/inventory/${id}`).then(results => {
+      this.props.updateInventory(results.data)
+  })
+}
 
   render() {
+
+    // let inventoryMap = this.state.inventory.map(s => {
+    //   return <Inventory updateInventory={this.updateInventory} s={s}/>
+    // })
+
     return (
       <div className="App">
-        Dashboard
-        Form
         Header
+        Form
+        Dashboard
+        <p>image Url:</p>
+        <input/>
+        <p>Product Name:</p>
+        <input/>
+        <p>Price:</p>
+          <input/>     
+        <button onClick={this.deleteItem}>Cancel</button>
+        <button onClick={this.addItem}>Save Changes</button>
       </div>
     );
   }

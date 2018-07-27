@@ -5,26 +5,32 @@ export default class Form extends Component {
     constructor() {
         super()
         this.state = {
-            imageurl: '',
-            productName: '',
-            price: 0,
-            product: []
+            image_url: '',
+            name: '',
+            price: 0
+            
         }
         this.addItem = this.addItem.bind(this)
     }
-    handleUserInput = (e) => {
-        this.setState({
-            product: e.target.value
-        })
+
+    handleImageurl = (e) => {
+        this.setState({image_url: e.target.value})
     }
+    handleName = (e) => {
+        this.setState({name: e.target.value})
+    }
+    handlePrice = (e) => {
+        this.setState({price: e.target.value})
+    }
+
     addItem() {
 
         let obj = {
-            item: this.state.product
+            item: this.state.inventory
         }
         axios.post('/api/inventory', obj).then(response => {
             this.setState({
-                list: response.data,
+                name: response.data,
                 product: ''
             })
         })
@@ -53,8 +59,8 @@ export default class Form extends Component {
                 <input />
                 <input />
 
-                <button onClick={this.deleteItem}>Cancel</button>
-                <button onClick={this.addItem}>Add to Inventory</button>
+                <button onClick={this.deleteItem}>edit</button>
+                <button onClick={this.addItem}>Delete</button>
             </div>
         )
     }

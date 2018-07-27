@@ -7,7 +7,11 @@ require('dotenv').config();
 const app = express();
 app.use(bodyParser.json());
 
-app.get('/api/inventory', controller.inventory)
+app.get('/api/inventory', controller.get_inventory)
+app.post('/api/inventory', controller.create_product)
+app.put('/api/inventory/:id', controller.update)
+app.delete('/api/inventory/id', controller.remove)
+
 
 massive(process.env.CONNECTION_STRING).then(db => {
     app.set('db', db);
